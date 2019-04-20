@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* .row{ */
+  /* background-color: rgb(226, 223, 223);
+  margin: 0 10%; */
+/* 
+} */
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 30vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form{
+  border-radius: 5px;
+  border:  1px rgb(219, 217, 217) solid ;
+  margin: 0 25%;
+  padding: 13px 0px
+}
+.form button {
+  width: 90%;
+  height: 34px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  text-transform: capitalize;
+  font-size: 14px;
+  /* padding-top: 30px; */
+}
+
+.action-btn {
+  width: 100%;
+
+}
+
+.action-btn button{
+  width: 28%;
+  margin: 10px;
+  height: 25px;
+  background-color:#2f6bee;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-size: 14px;
+  
+}
+
+.form input{
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  padding: 0 0 0 5px 
+}
+
+.form .icon-div{
+  background-color: #2f6bee;
+  margin: 2px 0;
+  /* border-radius: 5px */
+}
+
+.form-group{
+  display: flex;
+  width: 100%;
+  margin: 0 5%;
+  
+  /* padding: 0 20px 10px 20px ; */
+}
+
+.button-div{
+  margin-top: 15px;
+  /* margin-bottom: 10px; */
+}
+
+
+ul {
+  margin: 0 25%;
+  padding: 0
+}
+
+.item{
+  display: flex;
+  justify-content: space-evenly
+
+}
+
+h4 {
+  text-align: left;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+li {
+  border-radius: 5px;
+  width: 100%;
+  list-style: none;
+  border: 1px rgb(219, 217, 217) solid ;
+  /* text-decoration: none; */
+  margin: 15px 0;
+  padding: 7px 0;
+
+}
+
+.clear-all-btn{
+  margin-top: 10px;
+  width: 100%;
+  text-transform: capitalize;
+  height: 34px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: red;
+
+}
