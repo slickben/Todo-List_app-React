@@ -7,13 +7,18 @@ import './App.css';
 
 class App extends Component {
   state ={
-    items: [],
     id: 0,
+    items: [],
     item: "",
-    editItem: false,
-    complate: true, 
-    taskToShow: "all"
+    editing: "",
+    // isEditing: true,
+    complete: true, 
+    taskToShow: "all",
+
   };
+
+
+
 
   handleChange = e => {
     e.preventDefault()
@@ -22,23 +27,31 @@ class App extends Component {
     });
   };
 
+  handleEdithing = e => {
+    e.preventDefault()
+    this.setState({
+      editing: e.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault(); 
 
     const newItem = {
       id: this.state.id,
-      title: this.state.item 
+      title: this.state.item,
     }
+
+
 
     
 
     const updatedItem = [...this.state.items, newItem]
-    this.setState({
+    this.setState( state =>({
       items: updatedItem,
-      item: "",
-      id: Math.random().toString(36).substr(1, 9),
-      editItem: false
-    })
+      item:'',
+      id: state.id+1
+    }))
   };
 
   clearList = () =>{
@@ -47,10 +60,10 @@ class App extends Component {
     })
   }
 
-  clearAllComplate = () =>{
-    const complate = this.state.items.filter(item => !item.complate)
+  clearAllComplete = () =>{
+    const complete = this.state.items.filter(item => !item.complete)
     this.setState({
-      items: complate
+      items: complete
     })
   }
 
@@ -63,23 +76,67 @@ class App extends Component {
   }
 
   handleEdit = id => {
-    const filteredItems = this.state.items.filter(item => item.id !== id)
+    // this.props.handleSubmit = false
+    
     const seletedItem = this.state.items.find(item => item.id === id)
     this.setState({
-      items: filteredItems,
-      item: seletedItem.title,
+      editing: seletedItem.title,
+      items: this.state.items.map(item => {
+        if(item.id === id){
+          return {
+            ...item,
+            isEditing: !item.isEditing,
+          };
+        }
+        else{
+          return item;
+        }
+      }),
+      editItemId: seletedItem.id,
       editItem: true,
-      id: id
     });
 };
-    handleComplate = id => {
-      this.setState({
+
+  handleUpdatedItem = () => {
+
+    const seletedItemIndex = this.state.items.findIndex(item => item.id === this.state.editItemId)
+
+   let itemToUpdate = {
+      id: this.state.editItemId,
+      title: this.state.editing ,
+    }
+
+     this.setState(state => {
+          state.editItem = false;
+          state.isEditing = false;
+          state.editing = '';
+          return state.items.splice(seletedItemIndex, 1, itemToUpdate)
+          
+       })
+     }
+
+
+    // let itemToUpdate = {
+    //   id: this.state.id,
+    //   title: this.state.item 
+    // }
+    // function findTheEditedTask (task) {
+    //   return task === itemToUpdate.id
+    // }
+
+    // let EditedTaskIndex = this.state.items.findIndex(findTheEditedTask)
+    // this.setState({
+    //   items: this.state.items[EditedTaskIndex] = itemToUpdate,
+
+    // })
+ // }
+    handleComplete = id => { 
+      this.setState({            
         items: this.state.items.map(item => {
           if(item.id === id){
             return {
               ...item,
-              complate: !item.complate,
-              editItem: true,
+              complete: !item.complete,
             };
           }
           else{
@@ -110,18 +167,22 @@ class App extends Component {
               todo input
             </h3>
               <TodoInput item= {this.state.item} handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
+              handleSubmit={this.handleSubmit}             
               editItem={this.state.editItem}
 
               />
-              <TodoList 
+              <TodoList
+              handleUpdatedItem={this.handleUpdatedItem}
+              handleEdithing={this.handleEdithing}
+              editing=  {this.state.editing}
+              editItem={this.state.editItem}
               taskToShow={this.state.taskToShow}
               updateTaskToShow={this.updateTaskToShow}
               items={this.state.items} 
               clearList={this.clearList}
               handleDelete={this.handleDelete}
-              handleComplate={this.handleComplate}
-              clearAllComplate={this.clearAllComplate}
+              handleComplete={this.handleComplete}
+              clearAllComplete={this.clearAllComplete}
               handleEdit={this.handleEdit}
               />
             </div>
